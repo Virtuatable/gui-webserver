@@ -10,5 +10,12 @@ module Controllers
       set :views, (proc { File.join(root, 'views') })
       set :public_folder, File.join(settings.root, 'public')
     end
+
+    def self.init_csrf
+      return if ENV.fetch('RACK_ENV', 'development') == 'test'
+
+      use Rack::Session::Cookie, secret: 'secret'
+      use Rack::Protection::AuthenticityToken
+    end
   end
 end
