@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: gui
+  name: gui-webserver-service
+  labels:
+    app: gui-webserver
+spec:
+  selector:
+    app: gui-webserver
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9292

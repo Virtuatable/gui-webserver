@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: gui
+  name: gui-webserver-deployment
+  labels:
+    app: gui-webserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gui-webserver
+  template:
+    metadata:
+      labels:
+        app: gui-webserver
+    spec:
+      dnsPolicy: Default
+      containers:
+        - name: gui-webserver
+          image: virtuatable/gui-webserver:<VERSION>
+          args:
+            - web
+          ports:
+            - containerPort: 9292
+          env:
+            - name: BS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: block-storage
+                  key: endpoint
+            - name: BS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: block-storage
+                  key: access-key
+            - name: BS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: block-storage
+                  key: secret-key
+            - name: AUTH_API
+              valueFrom:
+                secretKeyRef:
+                  name: api
+                  key: authentication
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: application
+                  key: client_id
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: application
+                  key: client_secret
+          resources:
+            limits:
+              cpu: 250m
+              memory: 128Mi
+            requests:
+              cpu: 250m
+              memory: 128Mi
