@@ -4,17 +4,17 @@ metadata:
   namespace: gui
   name: gui-webserver-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
   labels:
     app: gui-webserver
 spec:
   rules:
     - http:
         paths:
-          - path: "/gui(/|$)(.*)"
+          - path: "/.*"
             pathType: Prefix
             backend:
               service:
-                name: authentication-service
+                name: gui-webserver-service
                 port:
                   number: 80
