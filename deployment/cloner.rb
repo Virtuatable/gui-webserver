@@ -11,14 +11,14 @@ s3 = Aws::S3::Resource.new({
 
 bucket = s3.bucket('virtuatable-frontend')
 
-object = bucket.object('auth-gui/current') # 'auth-gui/1650897348')
+object = bucket.object('gui/current') # 'auth-gui/1650897348')
 
 version = object.get.body.read.to_s.strip
 
-puts "[COPYING auth-gui/#{version}]"
-bucket.objects(prefix: "auth-gui/#{version}").each do |obj|
+puts "[COPYING gui/#{version}]"
+bucket.objects(prefix: "gui/#{version}").each do |obj|
   key = obj.key.clone
-  key["auth-gui/#{version}"] = 'public'
+  key["gui/#{version}"] = 'public'
   File.write(key, obj.get.body.read.to_s)
   puts "#{obj.key} -> #{key}"
 end
