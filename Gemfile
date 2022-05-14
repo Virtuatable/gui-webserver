@@ -6,6 +6,7 @@ group :development, :production, :test do
   gem 'dotenv'
   gem 'require_all'
   gem 'virtuatable-core', '1.5.0', require: 'core'
+  gem 'faraday'
 end
 
 group :development, :production do
