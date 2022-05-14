@@ -4,7 +4,8 @@ function web {
   # Installs the gem to use with the S3 script
   gem install aws-sdk-s3
   # Create the directory for the frontend
-  mkdir -p public/gui
+  mkdir -p public/css
+  mkdir -p public/js
   # Clones the folder marked as "current" in the public/ directory
   ruby ./deployment/cloner.rb
   # Starts the application
