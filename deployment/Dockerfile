@@ -1,8 +1,8 @@
 FROM ruby:3.0.0
 
-WORKDIR /auth
+WORKDIR /gui
 
-COPY . /auth
+COPY . /gui
 
 # Installs dependencies to be able to start the server
 RUN gem install bundler && bundle install

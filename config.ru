@@ -11,5 +11,4 @@ require './controllers/base'
 require_rel 'controllers/**/*.rb'
 
 map("/tokens") { run Controllers::Tokens.new }
-map("/ui") { run Controllers::Templates.new }
-map('/') { run Controllers::Base.new }
+map("/") { run Controllers::Templates.new }

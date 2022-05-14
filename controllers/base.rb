@@ -9,6 +9,8 @@ module Controllers
       set :root, File.absolute_path(File.join(File.dirname(__FILE__), '..'))
       set :views, (proc { File.join(root, 'views') })
       set :public_folder, File.join(settings.root, 'public')
+
+      puts settings.public_folder
     end
 
     def self.init_csrf
