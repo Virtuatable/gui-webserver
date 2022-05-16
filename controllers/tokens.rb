@@ -8,12 +8,15 @@ module Controllers
   # @author Vincent Courtois <courtois.vincent@outlook.com>
   class Tokens < Base
     post '/' do
-      resp = Faraday.post("#{ENV['AUTH_API']}/tokens", {
-        authorization_code: params['authorization_code'],
-        client_id: ENV['CLIENT_ID'],
-        client_secret: ENV['CLIENT_SECRET']
-      })
-
+      connection = Faraday.new(
+        url: ENV['AUTH_API'],
+        params: {
+          authorization_code: params['authorization_code'],
+          client_id: ENV['CLIENT_ID'],
+          client_secret: ENV['CLIENT_SECRET']
+        }
+      )
+      resp = connection.post('/auth/tokens')
       halt resp.status, resp.body
     end
   end
